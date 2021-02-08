@@ -1,0 +1,15 @@
+quizz_homepage:
+    path:     /home
+    defaults: { _controller: QuizzBundle:Default:index }
+
+quizz_signIn:
+    path:     /signIn
+    defaults: { _controller: QuizzBundle:Default:signIn }
+
+quizz_register:
+    path:     /register
+    defaults: { _controller: QuizzBundle:Default:register }
+
+quizz_oneArticle:
+    path:     /article
+    defaults: { _controller: QuizzBundle:Default:oneArticle }
