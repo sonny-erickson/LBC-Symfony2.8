@@ -13,3 +13,7 @@ quizz_register:
 quizz_oneArticle:
     path:     /article
     defaults: { _controller: QuizzBundle:Default:oneArticle }
+
+quizz_add:
+    path:     /add
+    defaults: { _controller: QuizzBundle:Products:add }

@@ -32,14 +32,16 @@
   </div>
   <div>
   
-
+  {% for produit in produits %}
+    {{produit.nom}}
+  {% endfor %}
   <div class="row">
     <div class="card col l3 m4 s6 padding">
       <div class="card-image waves-effect waves-block waves-light">
         <img class="activator" src="https://www.numerama.com/content/uploads/2019/05/test-velo-mad-in-france-1.jpg">
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Vélo super génial<i class="material-icons right">more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">Vélo<i class="material-icons right">more_vert</i></span>
         <p>19/09/21<p>
         <p>3000€<p>
         <p><a href="#">Plus d'informations</a></p>
