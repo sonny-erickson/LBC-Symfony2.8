@@ -32,79 +32,27 @@
   </div>
   <div>
   
-  {% for produit in produits %}
-    {{produit.nom}}
-  {% endfor %}
   <div class="row">
-    <div class="card col l3 m4 s6 padding">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="https://www.numerama.com/content/uploads/2019/05/test-velo-mad-in-france-1.jpg">
+     {% for produit in produits %}
+      <div class="card col l3 m4 s6 padding">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="{{produit.image}}">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{produit.nom}}<i class="material-icons right">more_vert</i></span>
+          <p>19/09/21<p>
+          <p>{{produit.prix}}<p>
+          <p><a href="#">Plus d'informations</a></p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Descripton<i class="material-icons right">close</i></span>
+          <p>{{produit.description}} </p>
+        </div>
       </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Vélo<i class="material-icons right">more_vert</i></span>
-        <p>19/09/21<p>
-        <p>3000€<p>
-        <p><a href="#">Plus d'informations</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
-      </div>
-    </div>
-    <div class="card col l3 m4 s6 padding">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="https://www.numerama.com/content/uploads/2019/05/test-velo-mad-in-france-1.jpg">
-      </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Vélo super génial<i class="material-icons right">more_vert</i></span>
-        <p>19/09/21<p>
-        <p>3000€<p>
-        <p><a href="#">Plus d'informations</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
-      </div>
-    </div>
-    <div class="card col l3 m4 s6 padding">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="https://www.numerama.com/content/uploads/2019/05/test-velo-mad-in-france-1.jpg">
-      </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Vélo super génial<i class="material-icons right">more_vert</i></span>
-        <p>19/09/21<p>
-        <p>3000€<p>
-        <p><a href="#">Plus d'informations</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
-      </div>
-    </div>
-    <div class="card col l3 m4 s6 padding">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="https://www.numerama.com/content/uploads/2019/05/test-velo-mad-in-france-1.jpg">
-      </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Vélo super génial<i class="material-icons right">more_vert</i></span>
-        <p>19/09/21<p>
-        <p>3000€<p>
-        <p><a href="#">Plus d'informations</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
-      </div>
-    </div>
+    {% endfor %}
   </div>
-  
-  
- 
 
-
-
-
- 
+    
 {% endblock %}
 
 {% block stylesheets %}

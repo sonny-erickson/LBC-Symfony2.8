@@ -1,6 +1,6 @@
 quizz_homepage:
     path:     /home
-    defaults: { _controller: QuizzBundle:Default:index }
+    defaults: { _controller: QuizzBundle:Products:add }
 
 quizz_signIn:
     path:     /signIn
@@ -15,5 +15,5 @@ quizz_oneArticle:
     defaults: { _controller: QuizzBundle:Default:oneArticle }
 
 quizz_add:
-    path:     /add
+    path:     /
     defaults: { _controller: QuizzBundle:Products:add }
