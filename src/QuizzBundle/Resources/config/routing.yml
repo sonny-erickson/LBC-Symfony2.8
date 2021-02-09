@@ -15,5 +15,9 @@ quizz_oneArticle:
     defaults: { _controller: QuizzBundle:Default:oneArticle }
 
 quizz_add:
-    path:     /
+    path:     /add
     defaults: { _controller: QuizzBundle:Products:add }
+
+quizz_formAdd:
+    path:     /formAdd
+    defaults: { _controller: QuizzBundle:Products:addProduct }

@@ -4,8 +4,38 @@ namespace QuizzBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use QuizzBundle\Entity\Produits;
+use QuizzBundle\Form\ProduitsType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductsController extends Controller{
+
+    public function addProductAction(Request $request){
+        //crée nouveau produit
+        $produit = New Produits();
+
+        // récup form
+        $form = $this->createForm(ProduitsType::class,$produit);
+
+        $form->handleRequest($request);
+
+        //si form est soumis
+
+        if($form->isSubmitted()){
+            //on save
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($produit);
+            $em->flush();
+
+            return new Response('produit add');
+        }
+
+        //génére html
+        $formView = $form->createView();
+
+        //render view
+        return $this->render('QuizzBundle:Default:formAdd.html.twig',array('form'=>$formView));
+    }
 
     public function addAction(){
         //appel à la BDD
@@ -18,8 +48,8 @@ class ProductsController extends Controller{
         // $produit->setPrix('250');
         // $produit->setImage('https://www.numerama.com/content/uploads/2019/05/test-velo-mad-in-france-1.jpg');
         // // garde en mémoire
-        // $em->persist($produit);
-        // // insére dans la BDD
+        //$em->persist($produit);
+        // insére dans la BDD
         // $produit2 = new Produits();
         // $produit2->setCategories('console');
         // $produit2->setDescription('Pas chère !!');
