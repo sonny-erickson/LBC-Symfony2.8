@@ -21,3 +21,6 @@ quizz_add:
 quizz_formAdd:
     path:     /formAdd
     defaults: { _controller: QuizzBundle:Products:addProduct }
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
