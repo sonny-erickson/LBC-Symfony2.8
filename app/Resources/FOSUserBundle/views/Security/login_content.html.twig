@@ -1,0 +1,58 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<div>
+    <h2 class="center-align">Login</h2>
+    <div id="login-page" class="row">
+      <div class="col s12 z-depth-6 card-panel">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+
+            <label for="username">{{ 'security.login.username'|trans }}</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+
+            <label for="password">{{ 'security.login.password'|trans }}</label>
+            <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+
+            {# <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label> #}
+
+            <button class="btn waves-effect deep-orange col s12" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}">Connection</button>
+            <div class="row">
+                <div class="input-field col s12">
+                <p class="margin center-align"><a href="{{path("fos_user_registration_register")}}">Toujours pas inscris ?</a></p>
+            </div>
+        </form>            
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+
+{% block stylesheets %}
+<style>
+   #login-page {
+   width: 500px;
+}
+.card-panel{
+    padding:50px!important;
+}
+h2{
+  padding-top:20px;
+  padding-bottom:20px;
+}
+input{
+    margin-bottom:20px;
+}
+button{
+    margin-top:50px
+}
+</style>
+{% endblock %}

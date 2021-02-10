@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+  <div>
+    <h2 class="center-align">Insciption</h2>
+    <div id="login-page" class="row">
+      <div class="col s12 z-depth-6 card-panel padding">
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+          <div class="row">
+            <div class="input-field col s12">
+              <button type="submit" value="{{ 'registration.submit'|trans }}" class="btn waves-effect deep-orange col s12">Inscription</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+            <p class="margin center-align"><a href="{{ path('fos_user_security_login')}}">Login</a></p>
+          </div>
+        {{ form_end(form) }}           
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+{% block stylesheets %}
+<style>
+   #login-page {
+   width: 500px;
+}
+h2{
+  padding-top:20px;
+  padding-bottom:20px;
+}
+.padding{
+    padding:40px!important;
+}
+</style>
+{% endblock %}
+
+
+
