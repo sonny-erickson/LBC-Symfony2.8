@@ -2,9 +2,9 @@
 
 namespace QuizzBundle\Form;
 
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;//Permet une vérification du type
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,11 +16,11 @@ class ProduitsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('description')
-            ->add('prix')
+            ->add('nom', TextType::class)
+            ->add('description', TextType::class)
+            ->add('prix', MoneyType::class)
             ->add('image')
-            ->add('categories');
+            ->add('categories',TextType::class);
     }/**
      * {@inheritdoc}
      */

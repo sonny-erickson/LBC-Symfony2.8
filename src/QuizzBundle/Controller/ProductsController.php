@@ -21,13 +21,14 @@ class ProductsController extends Controller{
 
         //si form est soumis
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             //on save
             $em=$this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
 
-            return new Response('produit add');
+            //return new Response('produit add');
+            return $this->redirectToRoute('quizz_homepage');
         }
 
         //génére html

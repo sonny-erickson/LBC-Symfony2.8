@@ -3,6 +3,8 @@
 namespace QuizzBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+// Permet de mettre des contraintes dans le form
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produits
@@ -25,6 +27,8 @@ class Produits
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=100)
+     * 
+     * @Assert\NotBlank(message="Nom obligatoire")
      */
     private $nom;
 
@@ -39,6 +43,12 @@ class Produits
      * @var float
      *
      * @ORM\Column(name="prix", type="float")
+     * 
+     * @Assert\GreaterThan(
+     *  value = 0,
+     *  message = "Prix doit être supérieur à zéro"
+     * )
+     * @Assert\NotBlank(message="Prix obligatoire")
      */
     private $prix;
 
