@@ -7,9 +7,17 @@ use QuizzBundle\Entity\Produits;
 use QuizzBundle\Form\ProduitsType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ProductsController extends Controller{
-
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("add", name="add_annonce")
+     *
+     * Security("has_role('ROLE_USER')")
+     */
     public function addProductAction(Request $request){
         //crée nouveau produit
         $produit = New Produits();
@@ -28,7 +36,7 @@ class ProductsController extends Controller{
             $em->flush();
 
             //return new Response('produit add');
-            return $this->redirectToRoute('quizz_homepage');
+            return $this->redirectToRoute('homepage');
         }
 
         //génére html
@@ -38,7 +46,10 @@ class ProductsController extends Controller{
         return $this->render('QuizzBundle:Default:formAdd.html.twig',array('form'=>$formView));
     }
 
-    public function addAction(){
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function findLastHomeAction(){
         //appel à la BDD
         $em = $this->getDoctrine()->getManager();
 

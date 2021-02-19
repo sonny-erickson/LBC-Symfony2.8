@@ -3,5 +3,5 @@ quizz:
     prefix:   /
 
 app:
-    resource: '@AppBundle/Controller/'
+    resource: '@QuizzBundle/Controller/'
     type: annotation
