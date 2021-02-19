@@ -2,6 +2,7 @@
 
 namespace QuizzBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;//Permet une vérification du type
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,9 +19,15 @@ class ProduitsType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('description', TextType::class)
-            ->add('prix', MoneyType::class)
+            ->add('prix', MoneyType::class, array(
+                'currency'=> false,
+            ))
             ->add('image')
-            ->add('categories',TextType::class);
+            ->add('categories', EntityType::class, array(
+                'class' => 'QuizzBundle\Entity\Categories',
+                'choice_label' => 'nom',
+                'expanded' => false,
+                'multiple' => false));
     }/**
      * {@inheritdoc}
      */

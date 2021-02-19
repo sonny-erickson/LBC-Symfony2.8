@@ -1,17 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
-    {{form_start(form)}}
-    {{form_widget(form)}}
-    <button type="submit" class="waves-effect waves-light btn-small">add</button>
+    <div class="container">
+        <h3 class="center-align">Déposez une annonce</h3>
+        <div class="formAdd">
+            {{form_start(form)}}
+            {{form_widget(form)}}
+            <button type="submit" class="waves-effect deep-orange waves-light btn-small">add</button>
+            {{form_end(form)}}
+        </div>
 
-    {{form_end(form)}}
-</div>
+    </div>
+
+
+
+
 {% endblock %}
 
 {% block stylesheets %}
-<style>
+    <style>
+        select{
+            display: block!important;
+        }
+        .formAdd{
+            padding-top:40px;
+            padding-bottom:40px;
+        }
+        .waves-effect{
+            margin-top:20px;
+            margin-bottom:20px;
+        }
 
-</style>
+    </style>
 {% endblock %}
+
+
+
