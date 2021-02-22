@@ -1,31 +1,30 @@
 <?php
-        // src/AppBundle/Entity/User.php
 
-    namespace QuizzBundle\Entity;
+namespace QuizzBundle\Entity;
 
-    use FOS\UserBundle\Model\User as BaseUser;
-    use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="users")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 
     /**
-     * @ORM\Entity
-     * @ORM\Table(name="users")
-     */
-    class User extends BaseUser
-    {
-        /**
-         * @ORM\Id
-         * @ORM\Column(type="integer")
-         * @ORM\GeneratedValue(strategy="AUTO")
-         */
-        protected $id;
-
-        public function __construct()
-        {
-            parent::__construct();
-            // your own logic
-        }
-
-     /**
      * @var string
      *
      * @ORM\Column(name="ville", type="string", length=100)
@@ -37,7 +36,7 @@
      */
     private $produits;
 
-    
+
     /**
      * Set ville
      *

@@ -2,6 +2,7 @@
 
 namespace QuizzBundle\Controller;
 
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use QuizzBundle\Entity\Produits;
 use QuizzBundle\Form\ProduitsType;
@@ -27,11 +28,13 @@ class ProductsController extends Controller{
 
         $form->handleRequest($request);
 
+
         //si form est soumis
 
         if($form->isSubmitted() && $form->isValid()){
             //on save
             $em=$this->getDoctrine()->getManager();
+            $produit->setUsers($this->getUser());// récup le current user
             $em->persist($produit);
             $em->flush();
 
@@ -72,7 +75,9 @@ class ProductsController extends Controller{
         // $em->persist($produit2);
         // // insére dans la BDD
         // $em->flush();
-        $produits =$em->getRepository('QuizzBundle:Produits')->findAll();
+        $produits =$em
+                        ->getRepository('QuizzBundle:Produits')
+                        ->getLastProducts();
 
         return $this->render('QuizzBundle:Default:index.html.twig',array('produits'=>$produits));
     }

@@ -10,4 +10,19 @@ namespace QuizzBundle\Repository;
  */
 class ProduitsRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getLastProducts()
+    {
+        return $this->createQueryBuilder('p')
+            ->addOrderBy('p.date', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
+
+
+
+
+    public function findByCategory($categoryId, $search) {
+        return $this->findBy(['categories' => $categoryId]);
+    }
 }
