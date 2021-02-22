@@ -85,9 +85,9 @@ class Produits
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="user")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $users;
+    private $user;
 
 
     /**
@@ -245,26 +245,26 @@ class Produits
     }
 
     /**
-     * Set users
+     * Set user
      *
-     * @param \QuizzBundle\Entity\User $users
+     * @param \QuizzBundle\Entity\User $user
      *
      * @return Produits
      */
-    public function setUsers(\QuizzBundle\Entity\User $users = null)
+    public function setUser(\QuizzBundle\Entity\User $user)
     {
-        $this->users = $users;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get users
+     * Get user
      *
      * @return \QuizzBundle\Entity\User
      */
-    public function getUsers()
+    public function getUser()
     {
-        return $this->users;
+        return $this->user;
     }
 }

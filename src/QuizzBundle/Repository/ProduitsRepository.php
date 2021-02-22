@@ -19,6 +19,14 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
             ->execute();
     }
 
+    public function findProductsByUser()
+    {
+        return $this->createQueryBuilder('p')
+            ->addOrderBy('p.user', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
+
 
 
 

@@ -26,9 +26,9 @@
             <a class="waves-effect waves-light deep-orange btn">Recherche</a>
           </div>
           {% if is_granted('ROLE_USER') %}
-            <h1>COOL USER {{ app.user.username }}</h1>
+            <h1>Connecté en tant que: {{ app.user.username }}</h1>
           {% else  %}
-            <h1>Pas bien</h1>
+            <h1>Pas de connecté</h1>
           {% endif %}
         </div>
       </div>
@@ -44,14 +44,16 @@
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4">{{produit.nom}}<i class="material-icons right">more_vert</i></span>
-          <p>{{produit.date|date('d-m-Y H:i:s')}}<p>
-          <p>{{produit.prix}}<p>
+          <p>{{produit.prix}} €<p>
+          <p>le {{produit.date|date('d-m-Y H:i')}}<p>
+          <p>Par : {{produit.user.username}} <p>
+
           <p><a href="#">Plus d'informations</a></p>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">Descripton<i class="material-icons right">close</i></span>
           <p>{{produit.description}} </p>
-          <p>{{ produit.categories.nom }}</p>
+          <p>Catégorie: {{ produit.categories.nom }}</p>
         </div>
       </div>
     {% endfor %}
@@ -62,7 +64,6 @@
 
 {% block stylesheets %}
 <style>
-    .aNav{color:#ff5722!important}
     .seek{
         display:flex;
         justify-content:center;

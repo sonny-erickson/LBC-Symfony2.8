@@ -12,12 +12,37 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ProductsController extends Controller{
+
+    /**
+     * @Route("/mon_profil", name="profil")
+     */
+    public function profile(){
+        //appel à la BDD
+        $em = $this->getDoctrine()->getManager();
+        $produits =$em->getRepository('QuizzBundle:Produits')
+            ->getLastProducts();
+        return $this->render('QuizzBundle:Default:profil.html.twig',array('produits'=>$produits));
+    }
+
+    /**
+     * @Route("/delete/{id}", name="product_delete")
+     */
+    public function delete(Produits $produits){
+        //appel à la BDD
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($produits);
+        $em->flush();
+
+        $this->addFlash('success', "Votre élément vient d'être supprimé!");
+        return $this->redirectToRoute('profil');
+    }
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("add", name="add_annonce")
      *
-     * Security("has_role('ROLE_USER')")
+     * @Security("has_role('ROLE_USER')")
      */
     public function addProductAction(Request $request){
         //crée nouveau produit
@@ -34,7 +59,7 @@ class ProductsController extends Controller{
         if($form->isSubmitted() && $form->isValid()){
             //on save
             $em=$this->getDoctrine()->getManager();
-            $produit->setUsers($this->getUser());// récup le current user
+            $produit->setUser($this->getUser());// récup le current user
             $em->persist($produit);
             $em->flush();
 

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <h1>Mon profil</h1>
+  <div class="col s12 m7">
+    <div class="card horizontal">
+      <div class="card-stacked">
+        <div class="card-content">
+          <i class="icone material-icons">person</i>
+          <p>Mon pseudo: {{ app.user.username }}</p>
+          <p>Mon adresse mail: {{ app.user.email }}</p>
+          <div class="right">
+            <a href="{{ path('fos_user_profile_edit') }}" class="waves-effect deep-orange waves-light btn-small">Modifier profil</a>
+            <a href="{{ path('fos_user_change_password') }}" class="waves-effect  red lighten-4 deep-orange-text btn-small">Modifier mot depasse</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Mes annonces en cours</h3>
+  {% for msg in app.session.flashBag.get('success') %}
+    <div class="card-panel red accent-2">{{ msg }}</div>
+  {% endfor %}
+  <div class="row">
+    {% for produit in produits %}
+
+      <div class="card col l3 m4 s6 padding">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="{{produit.image}}">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{produit.nom}}<i class="material-icons right">more_vert</i></span>
+          <p>{{produit.date|date('d-m-Y H:i:s')}}<p>
+          <p>{{produit.prix}}<p>
+          <a class="waves-effect red accent-3 btn-small right" href="{{ path('product_delete',{'id':produit.id}) }}"><i class="material-icons left">delete</i>Supprimer</a>
+
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Descripton<i class="material-icons right">close</i></span>
+          <p>{{produit.description}} </p>
+          <p>{{ produit.categories.nom }}</p>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+  <style>
+    h1, h3{font-size:2em;
+    text-align: center;
+    border-bottom: 1px black solid;
+    }
+    .icone{
+      font-size:5em!important;
+    }
+    button{margin-top: 10px;}
+    .row{width:100%}
+    .padding{padding:10px!important;}
+    .card-image{
+      display:flex!important;
+      justify-content:center;
+    }
+    img{
+      width:auto!important;
+      max-height:180px;
+    }
+  </style>
+{% endblock %}
+
+
+
