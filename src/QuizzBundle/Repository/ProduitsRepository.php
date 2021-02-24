@@ -22,7 +22,7 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
     public function findProductsByUser()
     {
         return $this->createQueryBuilder('p')
-            ->addOrderBy('p.user', 'DESC')
+            ->addOrderBy('p.categories', 'DESC')
             ->getQuery()
             ->execute();
     }

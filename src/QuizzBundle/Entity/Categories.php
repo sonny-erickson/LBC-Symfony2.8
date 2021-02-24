@@ -30,6 +30,15 @@ class Categories
      */
     private $nom;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Produits", mappedBy="categories")
+     */
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     /**
      * Get id

@@ -78,14 +78,14 @@ class Produits
      * @Assert\Type(type="QuizzBundle\Entity\Categories")
      *
      * --liaison des deux tables
-     * @ORM\ManyToOne(targetEntity="Categories", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Categories", cascade={"persist"}, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false, name="categories_id",referencedColumnName="id")
      */
     private $categories;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="user")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"}, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false, name="user_id",referencedColumnName="id")
      */
     private $user;
 

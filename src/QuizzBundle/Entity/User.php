@@ -2,6 +2,7 @@
 
 namespace QuizzBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,12 +19,6 @@ class User extends BaseUser
      */
     protected $id;
 
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
-
     /**
      * @var string
      *
@@ -32,9 +27,14 @@ class User extends BaseUser
     private $ville;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produits", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="Produits", mappedBy="user")
      */
     private $produits;
+
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
 
 
     /**

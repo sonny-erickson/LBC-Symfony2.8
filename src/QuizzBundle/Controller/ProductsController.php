@@ -20,7 +20,8 @@ class ProductsController extends Controller{
         //appel à la BDD
         $em = $this->getDoctrine()->getManager();
         $produits =$em->getRepository('QuizzBundle:Produits')
-            ->getLastProducts();
+            ->findProductsByUser();
+        dump($produits);
         return $this->render('QuizzBundle:Default:profil.html.twig',array('produits'=>$produits));
     }
 

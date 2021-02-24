@@ -3,6 +3,7 @@
 {% block body %}
 
   <h1>Mon profil</h1>
+  {{ dump() }}
   <div class="col s12 m7">
     <div class="card horizontal">
       <div class="card-stacked">
@@ -32,8 +33,9 @@
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4">{{produit.nom}}<i class="material-icons right">more_vert</i></span>
-          <p>{{produit.date|date('d-m-Y H:i:s')}}<p>
-          <p>{{produit.prix}}<p>
+          <p>Le {{produit.date|date('d-m-Y')}} à {{ produit.date|date('H:i') }}<p>
+          <p>Prix : {{produit.prix}} € <p>
+          <p>Créé par : {{produit.user.username}}<p>
           <a class="waves-effect red accent-3 btn-small right" href="{{ path('product_delete',{'id':produit.id}) }}"><i class="material-icons left">delete</i>Supprimer</a>
 
         </div>
