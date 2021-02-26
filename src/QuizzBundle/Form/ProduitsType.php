@@ -29,7 +29,8 @@ class ProduitsType extends AbstractType
                 'choice_label' => 'nom',
                 'expanded' => false,
                 'multiple' => false));
-    }/**
+    }
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

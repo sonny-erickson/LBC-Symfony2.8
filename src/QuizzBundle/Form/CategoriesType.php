@@ -32,5 +32,4 @@ class CategoriesType extends AbstractType
         return 'quizzbundle_categories';
     }
 
-
 }

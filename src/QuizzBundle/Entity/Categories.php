@@ -73,4 +73,9 @@ class Categories
     {
         return $this->nom;
     }
+    // en cas d'erreur , ne peut pas convertir catégorie en string
+    public function __toString()
+    {
+        return (string) $this->nom;
+    }
 }

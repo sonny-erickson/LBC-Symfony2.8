@@ -2,6 +2,9 @@
 
 namespace QuizzBundle\Repository;
 
+use QuizzBundle\Data\SearchData;
+use QuizzBundle\Form\ProduitsSearchType;
+
 /**
  * ProduitsRepository
  *
@@ -19,15 +22,37 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
             ->execute();
     }
 
-    public function findProductsByUser()
+    public function findProductsByUser($user)
     {
-        return $this->createQueryBuilder('p')
-            ->addOrderBy('p.categories', 'DESC')
+        $query=$this->createQueryBuilder('p')
+            ->leftJoin('p.user', 'u')
+            ->where('u.id=:userid')
+            ->setParameter('userid',$user->getId())
+            ->addOrderBy('p.nom', 'ASC')
             ->getQuery()
-            ->execute();
+            ->getResult();
+
+        return $query;
     }
 
+    public function findSearch( $search)
+    {
+        $query = $this
+            ->createQueryBuilder('p');
+            //->select('categorie', 'produits');
+            //->join('p.categories', 'c');
+        if(!empty($search["q"])){
+            $query = $query
+            ->andWhere("p.nom LIKE '%".$search["q"]."%'");
+        }
+        if (!empty($search["categorie"])) {
+            $query = $query
+                ->andWhere('p.categories = :categorie')
+                ->setParameter('categorie', $search["categorie"]);
+        }
+        return $query->getQuery()->getResult();
 
+    }
 
 
     public function findByCategory($categoryId, $search) {
