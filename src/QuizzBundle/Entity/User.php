@@ -31,12 +31,6 @@ class User extends BaseUser
      */
     private $produits;
 
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-    }
-
-
     /**
      * Set ville
      *

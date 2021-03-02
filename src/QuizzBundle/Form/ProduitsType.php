@@ -2,6 +2,8 @@
 
 namespace QuizzBundle\Form;
 
+use QuizzBundle\Entity\Categories;
+use QuizzBundle\Entity\Produits;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -25,10 +27,12 @@ class ProduitsType extends AbstractType
             ))
             ->add('image')
             ->add('categories', EntityType::class, array(
-                'class' => 'QuizzBundle\Entity\Categories',
+                'class' => Categories::class,
                 'choice_label' => 'nom',
                 'expanded' => false,
-                'multiple' => false));
+                'multiple' => false
+            ))
+        ;
     }
     /**
      * {@inheritdoc}
@@ -36,7 +40,7 @@ class ProduitsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QuizzBundle\Entity\Produits'
+            'data_class' => Produits::class
         ));
     }
 

@@ -35,6 +35,9 @@ class Categories
      */
     private $produits;
 
+    /**
+     * Categories constructor.
+     */
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -73,7 +76,10 @@ class Categories
     {
         return $this->nom;
     }
-    // en cas d'erreur , ne peut pas convertir catégorie en string
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string) $this->nom;

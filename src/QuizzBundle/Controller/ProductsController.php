@@ -2,36 +2,40 @@
 
 namespace QuizzBundle\Controller;
 
-use FOS\UserBundle\Model\UserInterface;
-use QuizzBundle\Data\SearchData;
-use QuizzBundle\Form\ProduitsSearchType;
+use QuizzBundle\Entity\User;
 use QuizzBundle\Form\SearchFindType;
-use QuizzBundle\Repository\ProduitsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use QuizzBundle\Entity\Produits;
 use QuizzBundle\Form\ProduitsType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class ProductsController extends Controller{
-
+class ProductsController extends Controller
+{
     /**
-     * @Route("/mon_profil", name="profil")
+     * @Route("/monProfil", name="mon_profil")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response|null
      */
-    public function profile(){
-        //appel à la BDD
+    public function monProfilAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $produits =$em->getRepository('QuizzBundle:Produits')
-            ->findProductsByUser($this->getUser()); //test à faire
-        return $this->render('QuizzBundle:Default:profil.html.twig',array('produits'=>$produits));
+
+        // test à faire
+        $produits = $em->getRepository(Produits::class)
+            ->findProductsByUser($this->getUser());
+
+        return $this->render('QuizzBundle:Default:profil.html.twig', array(
+            'produits' => $produits
+        ));
     }
 
     /**
      * @Route("/delete/{id}", name="product_delete")
+     * @param Request $request
+     * @param Produits $produits
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function delete(Produits $produits){
+    public function deleteAction(Request $request, Produits $produits){
         //appel à la BDD
         $em = $this->getDoctrine()->getManager();
         $em->remove($produits);
@@ -42,6 +46,7 @@ class ProductsController extends Controller{
     }
 
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("add", name="add_annonce")
@@ -58,8 +63,10 @@ class ProductsController extends Controller{
         //si form est soumis
         if($form->isSubmitted() && $form->isValid()){
             //on save
-            $em=$this->getDoctrine()->getManager();
-            $produit->setUser($this->getUser());// récup le current user
+            $em = $this->getDoctrine()->getManager();
+            /** @var User $user */
+            $user = $this->getUser();
+            $produit->setUser($user);
             $em->persist($produit);
             $em->flush();
             //return new Response('produit add');
@@ -68,11 +75,15 @@ class ProductsController extends Controller{
         //génére html
         $formView = $form->createView();
         //render view
-        return $this->render('QuizzBundle:Default:formAdd.html.twig',array('form'=>$formView));
+        return $this->render('QuizzBundle:Default:formAdd.html.twig',array(
+            'form' => $formView
+        ));
     }
 
     /**
      * @Route("/", name="homepage")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response|null
      */
     public function searchAction(Request $request){
         $formSearch = $this->createForm(SearchFindType::class);
@@ -94,14 +105,32 @@ class ProductsController extends Controller{
 
         return $this->render('QuizzBundle:Default:index.html.twig',array(
             'produits'=>$produits,
-            'form'=>$formSearch->createView()));
+            'form'=>$formSearch->createView()
+        ));
     }
 
     /**
-     * @Route("/oneProduct", name="oneProduct")
+     * @Route("/product/{id}", name="product_detail")
+     * @ParamConverter("produits", class="QuizzBundle\Entity\Produits")
+     * @param Request $request
+     * @param Produits $produit
+     * @return \Symfony\Component\HttpFoundation\Response|null
      */
-    public function oneProduct(){
-        return $this->render('QuizzBundle:Default:oneArticle.html.twig');
+    public function oneProduct(Request $request, Produits $produit){
+
+//      Avant le param converter
+//        $produit = $this->getDoctrine()
+//            ->getRepository(Produits::class)
+//            ->find($id);
+
+
+        //if (!$produit) {
+          //  throw $this->createNotFoundException(
+          //      'No product found for id '.$id
+          //  );}
+        return $this->render('QuizzBundle:Default:oneArticle.html.twig',array(
+            'produit'=>$produit
+        ));
     }
 
 }

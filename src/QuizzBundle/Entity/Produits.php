@@ -65,10 +65,6 @@ class Produits
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
-    public function __construct()
-    {
-        return $this->date= new \DateTime('now');
-    }
 
     /**
      * @var Categories
@@ -89,6 +85,13 @@ class Produits
      */
     private $user;
 
+    /**
+     * Produits constructor.
+     */
+    public function __construct()
+    {
+        return $this->date= new \DateTime('now');
+    }
 
     /**
      * Get id
@@ -247,11 +250,11 @@ class Produits
     /**
      * Set user
      *
-     * @param \QuizzBundle\Entity\User $user
+     * @param User $user
      *
      * @return Produits
      */
-    public function setUser(\QuizzBundle\Entity\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -261,7 +264,7 @@ class Produits
     /**
      * Get user
      *
-     * @return \QuizzBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {

@@ -13,7 +13,9 @@ use QuizzBundle\Form\ProduitsSearchType;
  */
 class ProduitsRepository extends \Doctrine\ORM\EntityRepository
 {
-
+    /**
+     * @return int|mixed|string
+     */
     public function getLastProducts()
     {
         return $this->createQueryBuilder('p')
@@ -22,9 +24,13 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
             ->execute();
     }
 
+    /**
+     * @param $user
+     * @return array|int|string
+     */
     public function findProductsByUser($user)
     {
-        $query=$this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->leftJoin('p.user', 'u')
             ->where('u.id=:userid')
             ->setParameter('userid',$user->getId())
@@ -35,7 +41,11 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
         return $query;
     }
 
-    public function findSearch( $search)
+    /**
+     * @param $search
+     * @return array|int|string
+     */
+    public function findSearch($search)
     {
         $query = $this
             ->createQueryBuilder('p');
@@ -55,6 +65,11 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
+    /**
+     * @param $categoryId
+     * @param $search
+     * @return array
+     */
     public function findByCategory($categoryId, $search) {
         return $this->findBy(['categories' => $categoryId]);
     }

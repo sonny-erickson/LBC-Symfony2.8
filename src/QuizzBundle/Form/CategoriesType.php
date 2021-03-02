@@ -2,6 +2,7 @@
 
 namespace QuizzBundle\Form;
 
+use QuizzBundle\Entity\Categories;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ class CategoriesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QuizzBundle\Entity\Categories'
+            'data_class' => Categories::class
         ));
     }
 

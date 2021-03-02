@@ -32,7 +32,7 @@
           <p>le {{produit.date|date('d-m-Y H:i')}}<p>
           <p>Par : {{produit.user.username}} <p>
 
-          <p><a href="#">Plus d'informations</a></p>
+          <p><a href="{{ path('produit',{'id':produit.id} )}}">Plus d'informations</a></p>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">Descripton<i class="material-icons right">close</i></span>
